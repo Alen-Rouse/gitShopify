@@ -1,0 +1,125 @@
+.card-btn{
+	position:relative;
+  	z-index:10;
+
+}
+#MainContent{
+	position:relative;
+}
+.mini-card{
+	position:fixed;
+  	width:300px;
+  	height:100vh;
+  	top:0;
+  	right:-100%;
+  	display:flex;
+  	justify-content:flex-end;
+  	z-index:1000;
+  	transition: all 1s ease-out;
+}
+.mini-cart_content{
+	width:100%;
+	background:#ffffff;
+  	padding:0 20px;
+  	
+}
+.mini-cart_item{
+  display:flex;
+  position:relative;
+  padding-right:15px;
+}
+.mini-cart_image{
+	margin-right:15px;
+
+}
+.mini-cart_image img{
+	max-width:70px;
+  	max-height:80px;
+  	width:70px;
+	height:80px;
+  	object-fit:cover;
+}
+.mini-cart_item .remove__btn{
+	position:absolute;
+  	top:50%;
+  	right:10px;
+  	transform: translateY(-50%);
+	
+
+}
+.mini_cart-title{
+	font-weight:bold;
+	position:relative;
+
+}
+.minicart__close{
+  	display:flex;
+	font-size:20px;
+  	font-weight:bold;
+	position:absolute;
+	top:50%;
+  	right:10px;
+  	transform: translateY(-50%);
+  	color:#000000;
+  	text-decoration:none;
+     
+}
+.minicart__close svg{
+	width:20px;
+  	height:20px;
+
+
+}
+.mini-cart_item-remove svg{
+
+	width:20px;
+  	height:20px;
+	color:#000000;
+}
+.mini-cart_item-header a{
+	color:#000000;
+  	text-decoration:none;
+
+}
+.mini-card{
+	/*display:none;*/
+	
+}
+.mini-cart-buttons button{
+	width:100% !important;
+}
+.mini-cart_item-quantity{
+	padding-right:25px;
+
+}
+.mini-cart_item-quantity .quantity .quantity__button{
+	width:30% !important;
+  	height:40px !important;
+  	display:flex !important;
+  	justify-content:center !important;
+  	align-items:center !important;
+
+}
+.mini-cart_item-quantity .quantity	.quantity__input{
+	width:40% !important;
+  	height:40px !important;
+  	text-align:center !important;
+  	border-left: 1px solid #000000 !important;
+	border-right: 1px solid #000000 !important;
+}
+.mini-cart_item-quantity .quantity{
+	min-height:40px !important;
+  	border: 1px solid #000000 !important;
+  	width:100% !important;
+  	max-width:100% !important;
+}
+
+.mini-cart_item-quantity .quantity:before{
+	content:none !important;
+
+}
+.mini-cart_item-quantity .quantity:after{
+	content:none !important;
+
+}
+

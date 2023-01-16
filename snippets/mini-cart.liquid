@@ -1,0 +1,101 @@
+<div class="mini-cart_content fadeIn">
+  <div class="mini-cart_inner">
+    <div class="mini-cart_body">
+      <div class="mini_cart-title">
+        <h2> Your cart </h2>
+        <a href="#" class="minicart__close"> {%include 'icon-close-small'%} </a>
+      </div>
+      <div class="mini-cart_items js-mini-cart_items">
+        {% for item in cart.items %}
+        <div id="{{item.id}}" class="mini-cart_item">
+
+
+          {% if item.image %}
+          <div class="mini-cart_image">
+            <a href="{{ item.url }}">
+              <img src="{{ item | img_url: '320x' }}" alt="{{ item.title | escape }}" class="lazyload" />
+            </a>
+          </div>
+          {% endif %}
+		  <div class="remove__btn">
+              <a href="#" class="mini-cart_item-remove" data-variant-id="{{item.id}}">{% include 'icon-remove' %} </a>
+          </div>
+          <div class="mini-cart_item__wrapper">
+           <form action="{{ routes.cart_url }}" class="cart__contents critical-hidden" method="post" id="cart">
+            <div class="mini-cart_item-header">
+              <a href="{{ item.url }}" class="mini-cart_item-title">
+                {{ item.product.title }}
+              </a>
+              <!-- <a href="#" class="mini-cart_item-remove" data-variant-id="{{ item.id }}">×</a> -->
+              <div id="CartCount" class="mini-cart_item-quantity" data-cart-count-bubble>
+                <form action="/cart/add" class="cart__contents critical-hidden" method="post" id="cart">
+                 {% comment %} <span class="item-option-value"> {{ item.quantity }} </span>  {% endcomment %}
+               	     <quantity-input class="quantity">
+                        <button class="quantity__button no-js-hidden" name="minus" type="button">
+                          <span class="visually-hidden">{{ 'products.product.quantity.decrease' | t: product: item.product.title | escape }}</span>
+                          {% render 'icon-minus' %}
+                        </button>
+                        <input class="quantity__input"
+                          type="number"
+                          name="updates[]"
+                          value="{{ item.quantity }}"
+                          min="0"
+                          aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
+                          id="Quantity-{{ item.index }}"
+                          data-index="{{ item.index }}"
+                          data-id="{{ item.id }}"
+                        >
+                        <button class="quantity__button no-js-hidden" name="plus" type="button">
+                          <span class="visually-hidden">{{ 'products.product.quantity.increase' | t: product: item.product.title | escape }}</span>
+                          {% render 'icon-plus' %}
+                        </button>
+                      </quantity-input>
+                </form>
+              </div>
+            </div>
+
+            <div class="mini-cart_item-options">
+              {% for option in item.product.options %}
+              {% capture value_key %}option{{ forloop.index }}{% endcapture %}
+              {% if item.variant[value_key] != 'Default Title' %}
+              <div class="mini-cart_item-option">
+                <span class="item-option-label">{{ option }}:</span>
+                <span class="item-option-value">{{ item.variant[value_key] }}</span>
+              </div>
+              {% endif %}
+              {% endfor %}
+
+              {% if item.properties %}
+              {% for p in item.properties %}
+              {% if p.last != blank %}
+              <div class="line-item">
+                {{ p.first }}: {{ p.last }}
+              </div>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+              <div class="mini-cart_item-option mini-cart_item-summary">
+                <div class="mini-cart_item-price">
+                  <div class="product__price">
+                    <span class="item-option-label">Price: </span> {{ item.variant.price | money }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        {% endfor %}
+      </div>
+	  <div class="mini-cart-buttons">
+          <form action="{{ routes.cart_url }}" method="post" novalidate class="cart my-form-cart">
+            <button name="checkout" class="cart__submit  my-cart__submit my-cart__submit-0 button btn btn--small-wide">GO TO CHECKOUT</button>
+          </form>
+          <!--<button name="checkout" class="cart__submit  my-cart__submit my-cart__submit-1 btn btn--small-wide">GO TO CHECKOUT</button> -->
+      </div>
+
+    </div>
+  
+  </div>
+</div>
+

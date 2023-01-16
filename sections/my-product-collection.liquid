@@ -1,0 +1,382 @@
+{{ 'my-product-collection-style.css' | asset_url | stylesheet_tag }}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" ></script>
+<script src="https://kit.fontawesome.com/3a8244c6d8.js" crossorigin="anonymous"></script>
+
+
+<div class="product-collection">
+    <div class="product-collection-wrap page-width">
+      	<div class="product-collection-title">
+          <h3>
+          		{{section.settings.NameTitle}}
+          </h3>
+      		
+      
+		</div>
+      	<div class="product-list-container">
+          	              
+                  		
+                  		
+                  		<div class="product-minilist">
+                  	 	{%- for block in section.blocks -%}	
+                          {% assign product = all_products[block.settings.product] %}
+                          {% if product != blank %}
+                          
+                          <div class="product-minilist-item">
+                  	 			<div class="product-minilist-item-image">
+                  	 				<img src="{{ product.featured_media | img_url: 'master' }}"> 
+                          			<div class="product-minilist-item-price">
+                                        <span class="price-item">
+                                          {{ product.price | money }} 
+                                          	
+                                        </span>
+                          
+                  					</div>	
+                  				</div>	
+                          		<div class="product-minilist-item-content">
+                  	 					<div class="product-minilist-item-title">
+                                          <h4>
+                                            {{ product.title }} 
+                                          
+                                          </h4>
+                          
+                  						</div>	
+                          				{%- if section.settings.hoverPrice -%}
+                                          <div class="product-minilist-item-btn hover">
+                                              <form action="/cart/add" method="post" class="product-form my-product-form">
+
+                                                <input name="id" value="{{ product.selected_or_first_available_variant.id }}" type="hidden" /> 
+                                                <input type="submit" value="" class="mini-add-btn btn product-form__add-to-cart button" />
+
+                                              </form>
+
+                                          </div>
+                                  		{%- else -%}
+                                  			<div class="product-minilist-item-btn">
+                                              <form action="/cart/add" method="post" class="product-form my-product-form">
+
+                                                <input name="id" value="{{ product.selected_or_first_available_variant.id }}" type="hidden" /> 
+                                                <input type="submit" value="" class="mini-add-btn btn product-form__add-to-cart button" />
+
+                                              </form>
+                          
+                  							</div>
+                                  				
+                                  		{%- endif -%}
+                  				</div>	
+                  			</div>
+                           {% endif %}
+                       	{% endfor %}
+                  		</div>
+        </div>
+      
+	</div>
+</div>
+
+<style>
+  .product-minilist-item-title h4{
+      
+      color: {{ section.settings.colorTextTitle }};
+  }
+  .product-minilist-item-price .price-item{
+  	  color: {{ section.settings.colorTextPrice }};
+  
+  }
+  .product-minilist-item-image {
+    padding-top:{{section.settings.imageProductHeight | append:'%'}};
+      border-radius:{{section.settings.imageRadius | append:'px'}};	
+  }
+  .product-minilist-item-image img{
+  	 border-radius:{{section.settings.imageRadius | append:'px'}};	
+  }
+  {%- if section.settings.hoverPrice -%}
+  	.product-minilist-item-price{
+        
+        opacity:0;
+	}
+  {% else %}
+  	.product-minilist-item-price{
+        
+        opacity:1;
+	}
+  {% endif %}
+
+  
+  @media(min-width:1025px){
+  
+    {% if section.settings.desktopColumn == 5 %}
+  		.product-minilist-item{
+            width:20% ;
+          	flex: 1 1 auto;
+ 			margin: 0 5px;
+        }
+    	.product-minilist{
+    		margin: 0 -5px;
+    	}
+    {% elsif  section.settings.desktopColumn == 4 %}
+    	.product-minilist-item{
+            width:25% ;
+          	 flex: 1 1 auto;
+ 			 margin: 0 5px;
+        }
+    	.product-minilist{
+    		margin: 0 -5px;
+    	}
+    
+    	
+    {% elsif  section.settings.desktopColumn == 3 %}
+    	.product-minilist-item{
+            width:33.33333% ;
+          	  
+
+        }
+    	.product-minilist-item:nth-child(2n+3){
+            
+			padding-left: 10px;
+        }
+    	.product-minilist-item:nth-child(2){
+            padding-right:10px;
+			padding-left: 10px;
+        }
+    	.product-minilist-item:nth-child(3n+3){
+            padding-left:20px;
+			
+        }
+    	.product-minilist-item:nth-child(3n+1){
+            padding-right:20px;
+			
+        }
+    	
+    
+    {% elsif  section.settings.desktopColumn == 2%}
+    	.product-minilist-item{
+            width:50% ;
+            
+
+        }
+         .product-minilist-item:nth-child(2n){
+            padding-left:10px;
+
+        }
+         .product-minilist-item:nth-child(2n+1){
+            padding-right:10px;
+
+        }
+    {% elsif  section.settings.desktopColumn == 1 %}
+    	.product-minilist-item{
+            width:100%;
+            
+
+        }
+    {% endif%}
+  	@media screen and (min-device-width: 768px) and (max-device-width: 1024px){
+  
+    {%if section.settings.tabletColumn == 3 %}
+    	.product-minilist-item{
+            width:33.33333% ;
+            
+
+        }
+      	.product-minilist-item:nth-child(2){
+            padding-right:10px;
+			padding-left: 10px;
+        }
+      	.product-minilist-item:nth-child(3n+3){
+            padding-left:20px;
+			
+        }
+    	.product-minilist-item:nth-child(3n+1){
+            padding-right:20px;
+			
+        }
+    	.product-minilist-item:nth-child(2n+3){
+            padding-right:10px;
+			padding-left: 10px;
+        }
+    {% elsif  section.settings.tabletColumn == 2%}
+    	.product-minilist-item{
+            width:50% ;
+            
+
+        }
+       .product-minilist-item:nth-child(2n){
+    	padding-left:10px;
+    
+    }
+     .product-minilist-item:nth-child(2n+1){
+    	padding-right:10px;
+    
+    }
+    {% elsif  section.settings.tabletColumn == 1 %}
+    	.product-minilist-item{
+            width:100% ;
+            
+
+        }
+    {% endif%}
+  
+  
+  }
+  @media(max-width:767px){
+  
+    {%if section.settings.tabletMobile == 3 %}
+    	.product-minilist-item{
+            width:33.33333% ;
+            
+
+        }
+    	.product-minilist-item:nth-child(2){
+            padding-right:10px;
+			padding-left: 10px;
+        }
+    	.product-minilist-item:nth-child(3n+3){
+            padding-left:20px;
+			
+        }
+    	.product-minilist-item:nth-child(3n+1){
+            padding-right:20px;
+			
+        }
+    	.product-minilist-item:nth-child(2n+3){
+            padding-right:10px;
+			padding-left: 10px;
+        }
+    
+    {% elsif  section.settings.tabletMobile == 2%}
+    	.product-minilist-item{
+            width:50% ;
+            
+
+        }
+    .product-minilist-item:nth-child(2n){
+    	padding-left:10px
+    
+    }
+     .product-minilist-item:nth-child(2n+1){
+    	padding-right:10px
+    
+    }
+    {% elsif  section.settings.tabletMobile == 1 %}
+    	.product-minilist-item{
+            width:100% !; 
+
+        }
+    {% endif%}
+  
+  
+  }
+  
+  
+  }
+
+  
+</style>
+
+
+{% schema %}
+  {
+    "name": "my-product-collection",
+    "settings": [
+		
+			{	
+				"type":"text",
+				"label":"section name",
+				"id":"NameTitle"
+
+			},
+			{
+				"type":"color",
+				"label":"color-Text-Title",
+				"id":"colorTextTitle"
+			},
+			{
+				"type":"color",
+				"label":"color-Text-price",
+				"id":"colorTextPrice"
+			},
+			{
+				"type":"range",
+				"default": 100,
+				"unit": "%",
+				"min":0,
+				"max":200,
+				"step":2,	
+				"label":"image-product-height",
+				"id": "imageProductHeight"
+			
+			},
+			{
+				"type":"range",
+				"default": 20,
+				"unit": "px",
+				"min":0,
+				"max":1000,
+				"step":10,	
+				"label":"radius-Image",
+				"id": "imageRadius"
+				
+			},
+			{
+				"type":"checkbox",
+				"id":"hoverPrice",
+				"label":"hover price",
+				"default": false	
+			},
+			{
+				"type":"range",
+				"default": 1,
+				"min":1,
+				"max":5,
+				"step":1,	
+				"label":"number of columns on desktop ",
+				"id": "desktopColumn"
+				
+			},
+			{
+				"type":"range",
+				"default": 3,
+				"min":1,
+				"max":3,
+				"step":1,	
+				"label":"number of columns on tablet ",
+				"id": "tabletColumn"
+				
+			},
+			{
+				"type":"range",
+				"default": 2,
+				"min":1,
+				"max":3,
+				"step":1,	
+				"label":"number of columns on mobile ",
+				"id": "tabletMobile"
+				
+			}
+			
+
+	],
+	"blocks": [
+		{
+			"type": "block",
+      		"name": "product",
+			"settings": [
+              {	
+                  "type":"product",
+                  "label":"product",
+                  "id":"product"
+
+              }
+
+			]
+		}	
+
+	],
+	"presets": [
+      {
+        "name": "my-product-collection"
+
+      }
+  	]
+  }
+{% endschema %}
+
+
