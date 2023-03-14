@@ -42,9 +42,9 @@
                   						</div>	
                           				{%- if section.settings.hoverPrice -%}
                                           <div class="product-minilist-item-btn hover">
-                                              <form action="/cart/add" method="post" class="product-form my-product-form">
+                                              <form action="/cart/add" data-productid="{{ product.id }}" method="post" class="product-form my-product-form">
 
-                                                <input name="id" value="{{ product.selected_or_first_available_variant.id }}" type="hidden" /> 
+                                                <input name="id" data-productid="{{ product.id }}" value="{{ product.selected_or_first_available_variant.id }}" type="hidden" /> 
                                                 <input type="submit" value="" class="mini-add-btn btn product-form__add-to-cart button" />
 
                                               </form>
@@ -52,9 +52,9 @@
                                           </div>
                                   		{%- else -%}
                                   			<div class="product-minilist-item-btn">
-                                              <form action="/cart/add" method="post" class="product-form my-product-form">
+                                              <form action="/cart/add" data-productid="{{ product.id }}" method="post" class="product-form my-product-form">
 
-                                                <input name="id" value="{{ product.selected_or_first_available_variant.id }}" type="hidden" /> 
+                                                <input name="id" data-productid="{{ product.id }}" value="{{ product.selected_or_first_available_variant.id }}" type="hidden" /> 
                                                 <input type="submit" value="" class="mini-add-btn btn product-form__add-to-cart button" />
 
                                               </form>

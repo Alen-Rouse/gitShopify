@@ -38,13 +38,13 @@
       style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
     >
        <div class="card-btn">
-         		{% comment %}<form method="post" action="/cart/add">
-                    <input name="id" value="{{ product_variant }}" type="hidden" />
+         		{% comment %}<form method="post" action="/cart/add" data-productid="{{ product.id }}">
+                    <input name="id" data-productid="{{ product.id }}" value="{{ product_variant }}" type="hidden" />
                     <input name="add" value="Add to cart" type="submit" class="product-form__add-to-cart  button">
 				</form>{% endcomment %}
-         		<form action="/cart/add" method="post" class="product-form my-product-form">
+         		<form action="/cart/add" data-productid="{{ product.id }}" method="post" class="product-form my-product-form">
 				
-                    <input name="id" value="{{ product_variant }}" type="hidden" /> 
+                    <input name="id" data-productid="{{ product.id }}" value="{{ product_variant }}" type="hidden" /> 
                     <input type="submit" value="ADD TO THE BOX" class="btn product-form__add-to-cart button" />
 
       	 		</form>
