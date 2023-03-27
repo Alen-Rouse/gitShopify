@@ -108,6 +108,7 @@
       <h2>{{ 'customer.account.details' | t }}</h2>
 
       {{ customer.default_address | format_address }}
+<div id="recurpay-account-widget"></div>
 
       <a href="{{ routes.account_addresses_url }}">
         {{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})
